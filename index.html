@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dharmi Sharma | Systems Designer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="night"> <!-- Initial state -->
+
+    <div id="loader"><p>Preparing the sky...</p></div>
+
+    <!-- MODE TOGGLE -->
+    <button id="modeToggle" class="mode-btn">Go Dark 👾</button>
+
+    <!-- THE LIVING BACKGROUND -->
+    <div class="sky-background">
+        <canvas id="matrixCanvas"></canvas>
+        <div class="sun-moon" id="celestialBody"></div>
+        
+        <!-- 5 Birds -->
+        <div class="bird-container b1"><div class="bird"></div></div>
+        <div class="bird-container b2"><div class="bird"></div></div>
+        <div class="bird-container b3"><div class="bird"></div></div>
+        <div class="bird-container b4"><div class="bird"></div></div>
+        <div class="bird-container b5"><div class="bird"></div></div>
+        
+        <div class="mountains"></div>
+    </div>
+
+    <!-- AVATAR SYSTEM -->
+    <div class="avatar-wrapper" id="avatarWrapper">
+        <div class="speech-bubble">Hi! I'm Dharmi. Click me!</div>
+        <div class="avatar-clickable-area" id="avatarTrigger">
+            <div class="avatar-circle">
+                <img src="avatar.png" alt="Avatar" class="avatar-img">
+            </div>
+            <div class="links-card" id="linksCard">
+                <a href="https://www.linkedin.com/in/dhaarmi-sharma" target="_blank" class="link-item">LinkedIn</a>
+                <a href="https://github.com/mightysnips" target="_blank" class="link-item">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <h1 class="hero-title">I design systems that think.</h1>
+            <p class="hero-subtitle">Computer Science Engineer · AI/ML · Full Stack Builder</p>
+            <div class="scroll-hint">Scroll to explore</div>
+        </section>
+
+        <!-- INTRODUCTION -->
+        <section class="content-section">
+            <div class="glass-card">
+                <h2>Vision</h2>
+                <p>Computer Science student at SRM Institute of Science & Technology (8.7 CGPA). I believe code is intention and responsibility. I build not to impress, but to improve.</p>
+            </div>
+        </section>
+
+        <!-- DETAILED PROJECTS -->
+        <section class="content-section">
+            <h2 class="section-title">Project Chapters</h2>
+            <div class="project-grid">
+                <!-- Project 1: Vitalink -->
+                <div class="project-box">
+                    <span class="emoji">🏥</span>
+                    <h3>Vitalink – HealthCare App</h3>
+                    <p class="tech-stack">Flutter | Firebase | Dart | NoSQL</p>
+                    <ul class="project-details">
+                        <li>Full-stack cross-platform app with secure Firebase Auth.</li>
+                        <li>Role-based dashboards for Patients & Doctors.</li>
+                        <li>Custom 3D rotating logo using AnimationController.</li>
+                    </ul>
+                </div>
+
+                <!-- Project 2: VIVEK AI -->
+                <div class="project-box special-border">
+                    <span class="emoji">⚖️</span>
+                    <h3>Project VIVEK (IFQM 2nd Place)</h3>
+                    <p class="tech-stack">AI Architecture | Judicial Tech</p>
+                    <ul class="project-details">
+                        <li>AI framework designed to address the Indian Judiciary backlog.</li>
+                        <li>Automates logical interpretation for non-subjective cases.</li>
+                        <li>Secured 2nd place and INR 10,000 cash prize.</li>
+                    </ul>
+                </div>
+
+                <!-- Project 3: Shortest Path -->
+                <div class="project-box">
+                    <span class="emoji">🗺️</span>
+                    <h3>Shortest Path Navigator</h3>
+                    <p class="tech-stack">C | Dijkstra’s Algorithm | Google Maps API</p>
+                    <ul class="project-details">
+                        <li>Graph-based network represented via adjacency lists.</li>
+                        <li>Calculates optimal routes using priority queues.</li>
+                        <li>Visualizes results via Google Maps URL redirection.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS ECOSYSTEM -->
+        <section class="content-section">
+            <h2 class="section-title">Technical Ecosystem</h2>
+            <div class="skills-wrap">
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">Java</div>
+                <div class="skill-tag">SQL</div>
+                <div class="skill-tag">React.js</div>
+                <div class="skill-tag">Generative AI</div>
+                <div class="skill-tag">FastAPI</div>
+                <div class="skill-tag">Solidity</div>
+                <div class="skill-tag">Figma</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Still learning. Still building.</p>
+            <p class="designed">DHARMI SHARMA · 2025</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
