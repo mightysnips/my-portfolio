@@ -460,10 +460,11 @@ function createSpark(x, y) {
     setTimeout(() => spark.remove(), 1000);
 }
 
-// MATRIX & THEME (Already optimized from previous versions)
+// MATRIX & THEME
 function updateTheme() {
     const hour = new Date().getHours();
     const celestial = document.getElementById('celestialBody');
+    if (!celestial) return;
     document.body.classList.remove('morning', 'afternoon', 'evening', 'night');
     celestial.classList.remove('sun', 'moon');
 
@@ -479,6 +480,7 @@ let matrixInterval;
 function initMatrix() {
     if(matrixInterval) clearInterval(matrixInterval);
     const canvas = document.getElementById('matrixCanvas');
+    if(!canvas) return;
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     const letters = "010101010111001";
@@ -500,3 +502,41 @@ function initMatrix() {
     }
     matrixInterval = setInterval(draw, 33);
 }
+
+// FIXED SKILL ANIMATION
+// REPLACE your existing skillObserver block at the end of script.js with this:
+const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const rows = entry.target.querySelectorAll('.skill-row');
+            rows.forEach(row => {
+                const fill = row.querySelector('.fill');
+                const level = row.getAttribute('data-level');
+                if (fill && level) {
+                    fill.style.width = level;
+                }
+            });
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.skills-category').forEach(cat => {
+    skillObserver.observe(cat);
+});
+
+// Add this to your script.js
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const fills = entry.target.querySelectorAll('.progress-fill');
+            fills.forEach(fill => {
+                const parent = fill.closest('.skill-row');
+                fill.style.width = parent.getAttribute('data-width');
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.skills-category').forEach(cat => {
+    observer.observe(cat);
+});

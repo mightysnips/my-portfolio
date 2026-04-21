@@ -114,11 +114,57 @@ body.matrix-mode .skill-box { color: #00ff41; border-color: rgba(0, 255, 65, 0.4
 section { min-height: 100vh; padding: 100px 8%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .hero-title { font-size: clamp(2.5rem, 9vw, 5rem); font-weight: 800; text-align: center; }
 .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; margin-top: 50px; }
-.project-box { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; text-align: left; }
-.project-box:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); }
-.special-border { border: 1px solid rgba(235, 51, 73, 0.4); }
-.view-btn { margin-top: 20px; padding: 10px 20px; background: none; border: 1px solid white; color: white; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+/* 1. Base Structure (Shared by both Project and Skill boxes) */
+.project-box, .skill-box {
+    padding: 30px;
+    border-radius: 20px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+/* 2. Light Theme Overrides (Morning & Afternoon) */
+body.morning .project-box, body.morning .skill-box,
+body.afternoon .project-box, body.afternoon .skill-box {
+    background: rgba(255, 255, 255, 0.6);
+    color: #2d3436; /* Dark text */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+body.morning .project-box:hover, body.morning .skill-box:hover,
+body.afternoon .project-box:hover, body.afternoon .skill-box:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-10px);
+}
+
+/* 3. Dark Theme Overrides (Night & Evening) */
+body.night .project-box, body.night .skill-box,
+body.evening .project-box, body.evening .skill-box {
+    background: rgba(75, 0, 130, 0.3); /* Violet-Blue tint */
+    color: #ffffff; /* White text */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+body.night .project-box:hover, body.night .skill-box:hover,
+body.evening .project-box:hover, body.evening .skill-box:hover {
+    background: rgba(148, 0, 254, 0.4); /* Brighter violet hover */
+    transform: translateY(-10px);
+}
+
+/* 4. Matrix Mode Overrides (Force high-contrast Green) */
+body.matrix-mode .project-box, body.matrix-mode .skill-box {
+    background: rgba(0, 10, 0, 0.8);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+}
+body.matrix-mode .project-box:hover, body.matrix-mode .skill-box:hover {
+    background: rgba(0, 40, 0, 0.9);
+}
+
+/* Specific UI Elements */
+.special-border { border: 1px solid rgba(235, 51, 73, 0.4) !important; }
+.view-btn { margin-top: 20px; padding: 10px 20px; background: none; border: 1px solid currentColor; color: inherit; border-radius: 5px; cursor: pointer; font-weight: bold; }
 .mode-btn { position: fixed; top: 30px; left: 30px; padding: 12px 20px; background: rgba(255,255,255,0.1); border: 1px solid white; color: white; border-radius: 50px; cursor: pointer; z-index: 10000; font-weight: bold; }
+
+/* Loader & Animations */
 #loader { position: fixed; inset: 0; background: #000; z-index: 100000; display: flex; justify-content: center; align-items: center; transition: 1s; }
 .spark { position: fixed; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 9999; animation: sparkFade 1s forwards; }
 @keyframes sparkFade { 0% { opacity: 1; transform: scale(1.5); } 100% { opacity: 0; transform: scale(0) translateY(50px); } }
@@ -161,4 +207,79 @@ section { min-height: 100vh; padding: 100px 8%; display: flex; flex-direction: c
 .skill-box:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-5px);
+}
+/* Clean Skill Row Layout */
+.skills-list { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+.skill-row { display: flex; align-items: center; gap: 20px; }
+.skill-row .label { width: 140px; font-weight: 600; font-size: 0.9rem; }
+.skill-row .bar { flex-grow: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+/* Ensure the bar exists and has a color */
+.skill-row .fill { 
+    height: 100%; 
+    width: 0; 
+    background: #eb3349; /* Default red color */
+    border-radius: 4px; 
+    transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); 
+}
+
+/* Colors based on your levels */
+.skill-row[data-level="10%"] .fill { background: #888; } /* Yet to learn */
+.skill-row[data-level="30%"] .fill { background: #f7df1e; } /* Beginner */
+.skill-row[data-level="70%"] .fill { background: #4facfe; } /* Good */
+.skill-row[data-level="90%"] .fill { background: #eb3349; } /* More Good */
+
+
+/* Skill Bar Layout */
+.skills-container { display: flex; flex-direction: column; gap: 40px; margin-top: 30px; }
+.skills-list { display: flex; flex-direction: column; gap: 15px; }
+.skill-row { display: flex; align-items: center; gap: 20px; }
+.skill-row .label { width: 150px; font-weight: 600; font-size: 0.9rem; }
+.skill-row .bar { flex-grow: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.skill-row .fill { height: 100%; width: 0; background: #eb3349; border-radius: 4px; transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Theme-based Bar Color */
+body.morning .skill-row .fill, body.afternoon .skill-row .fill { background: #6021f4; }
+body.night .skill-row .fill, body.evening .skill-row .fill { background: #00f2fe; }
+
+/* Progress Bar Styles */
+.skills-list { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+.skill-row { display: flex; align-items: center; gap: 20px; }
+.skill-row .label { width: 120px; font-weight: 500; font-size: 0.9rem; }
+.skill-row .bar { flex-grow: 1; height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; }
+.skill-row .fill { height: 100%; width: 0; background: #6021f4; border-radius: 5px; transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Fix Dark Mode colors */
+body.matrix-mode .skill-row .fill { background: #00ff41; }
+
+/* --- IMPROVED SKILLS SECTION STYLES --- */
+.skills-section { align-items: flex-start; padding: 50px 15%; }
+.skills-container { width: 100%; display: flex; flex-direction: column; gap: 30px; }
+
+.skill-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    margin-bottom: 15px; 
+    width: 100%;
+}
+
+.skill-label { 
+    min-width: 120px; 
+    font-weight: 500; 
+}
+
+.progress-bg { 
+    flex-grow: 1; 
+    height: 12px; 
+    background: rgba(255,255,255,0.1); 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.progress-fill { 
+    height: 100%; 
+    width: 0%; /* Start at 0 for animation */
+    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    border-radius: 10px;
+    transition: width 2s ease-out; /* Smooth animation */
 }
